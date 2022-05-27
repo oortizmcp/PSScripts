@@ -310,7 +310,7 @@ $enableReplicationJobs = New-Object System.Collections.ArrayList
 foreach ($sourceVmArmId in $sourceVmARMIds) {
 	# Trigger Enable protection
 	$vmIdTokens = $sourceVmArmId.Split('/');
-	$vmName = $vmIdTokens[8]
+	$vmName = $vmIdTokens[8].Split('''}');
 	$vmResourceGroupName = $vmIdTokens[4]
 	$message = 'Enable protection to be triggered for {0} using VM name {1} as protected item ARM name.' -f $sourceVmArmId, $vmName
 	$vm = Get-AzVM -ResourceGroupName $vmResourceGroupName -Name $vmName
