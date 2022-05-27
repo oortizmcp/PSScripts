@@ -1,15 +1,14 @@
 param(
     [string] $VaultSubscriptionId,
     [string] $VaultResourceGroupName,
-    [string] $vmResourceGroupName,
     [string] $VaultName,
     [string] $PrimaryRegion,
     [string] $RecoveryRegion,
     [string] $policyName = 'A2APolicy',
-	[string] $sourceVmARMIdsCSV,
-	[string] $TargetResourceGroupId,
+    [string] $sourceVmARMIdsCSV,
+    [string] $TargetResourceGroupId,
     [string] $TargetVirtualNetworkId,
-	[string] $PrimaryStagingStorageAccount,
+    [string] $PrimaryStagingStorageAccount,
     [string] $RecoveryReplicaDiskAccountType = 'Standard_LRS',
     [string] $RecoveryTargetDiskAccountType = 'Standard_LRS'
 )
@@ -42,7 +41,7 @@ $message = 'Vault context set.'
 Write-Output $message
 Write-Output $CRLF
 
-# Lookup and create replication fabrics if required.
+# Lookup and create replicatio fabrics if required.
 $azureFabrics = get-asrfabric
 Foreach($fabric in $azureFabrics) {
     $message = 'Fabric {0} in location {1}.' -f $fabric.Name, $fabric.FabricSpecificDetails.Location
@@ -312,6 +311,7 @@ foreach ($sourceVmArmId in $sourceVmARMIds) {
 	# Trigger Enable protection
 	$vmIdTokens = $sourceVmArmId.Split('/');
 	$vmName = $vmIdTokens[8]
+	$vmResourceGroupName = $vmIdTokens[4]
 	$message = 'Enable protection to be triggered for {0} using VM name {1} as protected item ARM name.' -f $sourceVmArmId, $vmName
 	$vm = Get-AzVM -ResourceGroupName $vmResourceGroupName -Name $vmName
 	Write-Output $message
