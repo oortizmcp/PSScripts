@@ -309,7 +309,7 @@ $DeploymentScriptOutputs['RecoveryProtectionContainerMapping'] = $reverseContain
 $enableReplicationJobs = New-Object System.Collections.ArrayList
 foreach ($sourceVmArmId in $sourceVmARMIds) {
 	# Trigger Enable protection
-	$vmIdTokens = $sourceVmArmId.Split('/').Split("'}");
+	$vmIdTokens = $sourceVmArmId.Split('/').Split("'");
 	$vmName = $vmIdTokens[8] 
     	$vmResourceGroupName = $vmIdTokens[4]
 	$message = 'Enable protection to be triggered for {0} using VM name {1} as protected item ARM name.' -f $sourceVmArmId, $vmName
