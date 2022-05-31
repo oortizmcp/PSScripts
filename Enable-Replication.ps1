@@ -378,7 +378,7 @@ foreach ($job in $enableReplicationJobs) {
 		if ($irJobs -ne $null -and $irJobs.Length -ne $0) {
 			$secondaryIrJob = $irJobs | where {$_.JobType -like 'SecondaryIrCompletion'}
 			if ($secondaryIrJob -ne $null -and $secondaryIrJob.Length -ge $1) {
-				$irFinished = $secondaryIrJob.State -eq 'Succeeded' -or $secondaryIrJob.State -eq 'Failed'
+				$irFinished = $secondaryIrJob.State -eq 'Succeeded' -or $secondaryIrJob.State -eq 'Failed' -or $secondaryIrJob.State -eq 'CompletedWithInformation'
 			}
 			else {
 				$irFinished = $irJobs.State -eq 'Failed'
