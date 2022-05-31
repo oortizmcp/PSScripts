@@ -9,6 +9,7 @@ param(
     [string] $sourceVmARMIdsCSV,
     [string] $TargetResourceGroupId,
     [string] $TargetVirtualNetworkId,
+    [string] $TargetAvailabilitySetId,
     [string] $PrimaryStagingStorageAccount,
     [string] $RecoveryReplicaDiskAccountType = 'Standard_LRS',
     [string] $RecoveryTargetDiskAccountType = 'Standard_LRS'
@@ -292,7 +293,6 @@ if ($reverseContainerMapping -eq $null) {
             $se
         }
        }
-
        throw $message
     }	
 	$reverseContainerMapping = Get-AzRecoveryServicesAsrProtectionContainerMapping -Name $protectionContainerMappingName -ProtectionContainer $recContainer    
@@ -336,7 +336,7 @@ foreach ($sourceVmArmId in $sourceVmARMIds) {
 	
 	$job = New-AzRecoveryServicesAsrReplicationProtectedItem -Name $vmName -ProtectionContainerMapping $primaryProtectionContainerMapping `
 		-AzureVmId $vm.ID -AzureToAzureDiskReplicationConfiguration $diskList -RecoveryResourceGroupId $TargetResourceGroupId `
-		-RecoveryAzureNetworkId $TargetVirtualNetworkId
+		-RecoveryAzureNetworkId $TargetVirtualNetworkId -RecoveryAvailabilitySetId $TargetAvailabilitySetId
 	$enableReplicationJobs.Add($job)
 }
 
