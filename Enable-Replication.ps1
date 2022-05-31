@@ -374,7 +374,7 @@ foreach ($job in $enableReplicationJobs) {
 	$irFinished = $false
 	do 
 	{
-		$irJobs = Get-AzRecoveryServicesAsrJob | where {$_.JobType -like '*IrCompletion' -and $_.TargetObjectName -eq $targetObjectName -and $_.StartTime -gt $startTime} | Sort-Object StartTime -Descending | select -First 2  
+		$irJobs = Get-AzRecoveryServicesAsrJob | where {$_.JobType -like '*IrCompletion' -and $_.TargetObjectName -eq $targetObjectName} | Sort-Object StartTime -Descending | select -First 2  
 		if ($irJobs -ne $null -and $irJobs.Length -ne $0) {
 			$secondaryIrJob = $irJobs | where {$_.JobType -like 'SecondaryIrCompletion'}
 			if ($secondaryIrJob -ne $null -and $secondaryIrJob.Length -ge $1) {
