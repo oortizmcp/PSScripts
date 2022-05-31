@@ -6,10 +6,10 @@ param(
     [string] $PrimaryRegion,
     [string] $RecoveryRegion,
     [string] $policyName = 'A2APolicy',
-	[string] $sourceVmARMIdsCSV,
-	[string] $TargetResourceGroupId,
+    [string] $sourceVmARMIdsCSV,
+    [string] $TargetResourceGroupId,
     [string] $TargetVirtualNetworkId,
-	[string] $PrimaryStagingStorageAccount,
+    [string] $PrimaryStagingStorageAccount,
     [string] $RecoveryReplicaDiskAccountType = 'Standard_LRS',
     [string] $RecoveryTargetDiskAccountType = 'Standard_LRS'
 )
